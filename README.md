@@ -17,7 +17,7 @@ It tests whether **chemistry alone** contains enough predictive signal to suppor
 ## Thesis
 
 > Even with chemistry alone, there is meaningful and calibratable predictive signal for UTS, sufficient to support risk-aware engineering decisions.
-> When paired with uncertainty estimates (e.g., prediction intervals), this signal can support robust design decisions such as defining safe process margins and reducing non-conformance risk.
+> When paired with empirically observed uncertainty, via out-of-fold error, this signal can support robust design reasoning such as defining conservative composition margins and reducing non-conformance risk.
 
 ---
 
@@ -26,9 +26,10 @@ It tests whether **chemistry alone** contains enough predictive signal to suppor
 ### In scope
 - Chemistry-only feature set (composition variables)
 - UTS prediction as the primary target
-- Group-aware evaluation (to avoid leakage across related heats/conditions)
-- Uncertainty outputs (prediction intervals and calibration)
+- Group-aware evaluation to avoid leakage across related heats/conditions
+- Empirical uncertainty estimation based on out-of-fold error
 - Interpretability sufficient to support engineering insight (not just performance)
+
 
 ### Out of scope (explicit)
 - Adding process or route variables (reserved for later study cases)
@@ -67,22 +68,24 @@ without introducing additional domain-specific complexity.
    - Group-aware cross-validation (e.g., GroupKFold) aligned with industrial reality
    - Report performance distributions across folds, not just averages
 
-3. **Uncertainty and calibration**
-   - Produce prediction intervals (e.g., p10/p50/p90)
-   - Evaluate calibration (coverage) and sharpness (interval width)
+3. **Uncertainty and robustness**
+   - Use out-of-fold residuals to estimate realistic prediction error
+   - Translate empirical error into conservative safety margins for design reasoning
+
 
 4. **Interpretability**
    - Identify dominant chemistry drivers (global + local where helpful)
    - Translate into engineering-relevant insights (not feature importance theater)
 
 5. **Design artifacts**
-   - “Design maps” (2D chemistry spaces) showing:
-     - predicted UTS quantiles
-     - uncertainty/risk regions
+   - Design maps (2D chemistry spaces) showing:
+     - expected UTS (p50)
+     - conservative regions based on empirical error margins
+
 
 6. **Inverse design - illustrative**
-   - Illustrate how to search chemistry regions that satisfy robust targets
-   - Emphasis on feasibility and constraints, not optimization novelty
+   - Illustrate feasibility screening in chemistry space under conservative constraints
+   - Emphasis on robustness and constraint satisfaction, not numerical optimization
 
 ---
 
@@ -90,14 +93,13 @@ without introducing additional domain-specific complexity.
 
 ### Tables
 - Baseline vs ML comparison (MAE, RMSE, R²) under GroupKFold
-- Interval metrics: coverage (p10–p90) and average width
+- Out-of-fold error statistics used as conservative margins
 - Summary of top chemistry drivers
 
 ### Figures
-- Predicted vs actual with uncertainty
-- Calibration plots (coverage vs nominal)
-- Design maps: p10 / p50 / p90
-- Risk/uncertainty maps (interval width)
+- Predicted vs actual (out-of-fold)
+- Residual diagnostics (out-of-fold)
+- Design maps: expected UTS (p50) and conservative regions (p50 − margin)
 
 ### Decision-ready artifacts
 - Robust region definition (e.g., p10 ≥ specification target)
@@ -110,9 +112,10 @@ without introducing additional domain-specific complexity.
 A model is considered useful if it demonstrates:
 
 - **Consistent predictive signal** across group folds (not just overall fit)
-- **Reasonable calibration** of prediction intervals (coverage near nominal)
+- **Stable and unbiased out-of-fold error**, suitable for conservative decision-making
 - **Actionable interpretability** (stable chemistry drivers, plausible metallurgy)
-- **Decision value**: ability to define robust regions and margins under constraints
+- **Decision value**: ability to define conservative regions and margins under constraints
+
 
 Not considered success criteria:
 - maximizing R² via aggressive tuning
@@ -127,9 +130,9 @@ This study case is complete when:
 
 - A chemistry-only baseline and a simple ML model are implemented and evaluated
 - Group-aware results are reproducible from the semantic layer
-- Prediction intervals are produced and assessed for calibration and width
-- A consistent set of design maps and robust regions is generated
-- Findings are summarized into decision-oriented guidance (what this enables / what it cannot)
+- Out-of-fold error is quantified and used as an empirical safety margin
+- A consistent set of conservative design maps is generated
+- Findings are summarized into decision-oriented guidance
 
 ---
 
