@@ -42,9 +42,8 @@ It tests whether **chemistry alone** contains enough predictive signal to suppor
 - Extensive hyperparameter tuning aimed at leaderboard performance
 - Multitarget models (e.g., UTS + YS + elongation) unless required by data availability
 
-Although the underlying modeling framework can be extended to other mechanical properties
-(e.g., yield strength and elongation), this study case focuses on UTS as a representative target as a solid base for future improvements. This allows a controlled evaluation of chemistry-only predictive signal
-without introducing additional domain-specific complexity.
+> Although the underlying modeling framework can be extended to other mechanical properties
+(e.g., yield strength and elongation), this study case focuses on UTS as a representative target as a solid base for future improvements. This allows a controlled evaluation of chemistry-only predictive signal without introducing additional domain-specific complexity.
 
 
 ---
@@ -58,8 +57,8 @@ All data, join keys, and grain guarantees are provided by the SC1 semantic views
 
 
 **Assumptions:**
-- Chemistry and UTS are correctly linked at the intended grain, one row per heat/test definition
-- Chemistry variables are within a reasonable domain and under defined specification
+- One row per heat/test definition
+- Valid chemistry ranges within specification
 
 ---
 
@@ -70,8 +69,7 @@ All data, join keys, and grain guarantees are provided by the SC1 semantic views
    - Polynomial model for baseline comparison
    - One ML baseline (e.g., tree-based) for non-linear signal capture
    - Keep modeling choices conservative and interpretable
-
-Random Forest is used as a non-linear probe, not as a production candidate.
+   - Random Forest is used as a non-linear probe, not as a production candidate.
 
 2. **Validation strategy**
    - Group-aware cross-validation (e.g., GroupKFold) aligned with industrial reality
@@ -87,12 +85,34 @@ Random Forest is used as a non-linear probe, not as a production candidate.
 
 ---
 
+## Model comparison and robustness assessment
+
+To evaluate whether chemistry-only models can support **risk-aware engineering decisions**, models are compared using **out-of-fold performance under group-aware cross-validation**.
+
+The figure below summarizes the **median cross-validated MAE**, together with its **interquartile range (IQR)** across folds:
+
+![Cross-validated MAE with robustness (IQR)](assets/sc02_cross_validated_mae_robustness.png)
+
+**Interpretation:**
+
+- **Random Forest (RF)** achieves the lowest median MAE, indicating strong predictive capability.
+- **Ridge and polynomial models** exhibit slightly higher median error, but comparable robustness.
+- Despite its lower MAE, **RF is not retained as the primary design model**, as its non-smooth response surfaces and limited interpretability reduce suitability for downstream engineering tools.
+
+This comparison illustrates a key principle of this portfolio:
+
+> **The preferred model is not the one with the lowest error, but the one that best balances accuracy, robustness, and interpretability under realistic validation.**
+
+As a result, **ridge regression** is selected as the reference chemistry-only model for subsequent study cases, providing a stable and interpretable foundation for uncertainty quantification and design map construction.
+
+---
+
+
 ## Expected Outputs
 
 ### Tables
 - Baseline vs ML comparison (MAE, RMSE, R²) under GroupKFold
 - Out-of-fold error statistics used as conservative margins
-- Summary of top chemistry drivers
 
 ### Figures
 - Predicted vs actual (out-of-fold)
@@ -140,9 +160,7 @@ These are intentionally deferred to later study cases.
 
 ---
 ## Key takeaway
-This study demonstrates that chemistry alone defines a large portion of the feasible
-strength envelope. While insufficient for final quality release, it provides a robust,
-early-stage decision tool to reduce risk and focus downstream process optimization.
+> This study demonstrates that chemistry alone defines a large portion of the feasible strength envelope. While insufficient for final quality release, it provides a robust, early-stage decision tool to reduce risk and focus downstream process optimization.
 
 ---
 
