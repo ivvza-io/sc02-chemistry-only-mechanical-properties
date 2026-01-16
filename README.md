@@ -86,6 +86,8 @@ More complex non-linear learners were deliberately excluded to preserve:
 
 > Common portfolio-wide assumptions and conventions are documented in  
 > → [`README_EXTENDED.md`](https://github.com/ivvza-io/analytics-engineering-portfolio/blob/main/docs/README_EXTENDED.md)
+> Design rationale, methodological decisions, and implementation-level technical documentation are maintained in  
+→ [`docs/technical-notes`](https://github.com/ivvza-io/sc02-chemistry-only-mechanical-properties/tree/main/docs/technical_notes.md)
 
 ---
 
