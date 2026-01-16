@@ -7,19 +7,19 @@
 ## 1. Why This Study Case Exists
 
 In the industrial context that motivated this work, the organization lacked **internal standards** across multiple dimensions:
-- Chemical composition  
-- Mechanical properties  
-- Process targets  
+- Chemical composition
+- Mechanical properties
+- Process targets
 
 As long as materials complied with **bussines common specifications**, they were released, even when recurring downstream issues were observed:
 
-- Materials consistently too hard or too soft  
-- Unstable forming behavior  
-- Customer claims despite formal compliance  
+- Materials consistently too hard or too soft
+- Unstable forming behavior
+- Customer claims despite formal compliance
 
 The absence of internal standards made it impossible to distinguish between:
-- *Chemistries that are acceptable*  
-- *Chemistries that are operationally robust*  
+- *Chemistries that are acceptable*
+- *Chemistries that are operationally robust*
 
 Defining internal standards through **physical trial campaigns** would have required significant time, cost, and production disruption.  
 This study case evaluates whether **historical production and testing data** can be used to **initiate internal chemistry-based standards for UTS**, starting from the earliest controllable variable in the process chain.
@@ -33,9 +33,9 @@ This study case evaluates whether **historical production and testing data** can
 External specifications define **allowable ranges**, not **operational targets**.
 
 Without internal standards:
-- Decision-making relies on binary compliance  
-- Risk accumulates silently within the specification window  
-- Engineering teams lack quantitative guidance for preventive action  
+- Decision-making relies on binary compliance
+- Risk accumulates silently within the specification window
+- Engineering teams lack quantitative guidance for preventive action
 
 The central strategic question is therefore:
 
@@ -46,9 +46,9 @@ The central strategic question is therefore:
 > *Chemical composition alone contains a statistically meaningful and stable signal for UTS, sufficient to support the definition of conservative internal chemistry standards, even if it is insufficient for final property release.*
 
 **Out of scope:**
-- Process variables  
-- Microstructural descriptors  
-- Release-grade prediction  
+- Process variables
+- Microstructural descriptors
+- Release-grade prediction
 
 These exclusions are intentional to evaluate whether chemistry alone is a viable foundation for internal standardization.
 
@@ -62,9 +62,9 @@ Before introducing additional variables or complex learners, it is essential to 
 ### 3.2 Interpretability Over Marginal Accuracy  
 Internal standards must be explainable, stable, and **communicable** across engineering and quality teams.  
 For this reason, models are evaluated not only by MAE, but by:
-- Stability across validation folds  
-- Continuity of response surfaces  
-- Suitability for defining conservative target regions  
+- Stability across validation folds
+- Continuity of response surfaces
+- Suitability for defining conservative target regions
 
 ### 3.3 Tail Risk Matters More Than Mean Error  
 Standards exist to prevent **rare but costly failures**, not to optimize average performance.  
@@ -75,14 +75,14 @@ Tail behavior is therefore treated as a first-class concern.
 ## 4. Methodological Decisions (What We Chose — and Why)
 
 - **Analytical unit:** heat-level aggregation (one row per heat)  
-- **Validation:** Group-aware cross-validation by heat to prevent leakage  
-- **Error basis:** exclusively out-of-fold predictions  
-- **Model classes:** linear and mildly flexible models prioritized  
+- **Validation:** Group-aware cross-validation by heat to prevent leakage
+- **Error basis:** exclusively out-of-fold predictions
+- **Model classes:** linear and mildly flexible models prioritized
 
 More complex non-linear learners were deliberately excluded to preserve:
-- Interpretability  
-- Surface continuity  
-- Robustness of derived standards  
+- Interpretability
+- Surface continuity
+- Robustness of derived standards
 
 > Common portfolio-wide assumptions and conventions are documented in  
 > → [`README_EXTENDED.md`](https://github.com/ivvza-io/analytics-engineering-portfolio/blob/main/docs/README_EXTENDED.md)
@@ -121,6 +121,15 @@ Key observations:
 - Chemistry-only models exhibit **stable, non-trivial predictive signal**
 - Differences in median MAE are moderate
 - **Tail error (P95)** reveals clearer separation between model families
+
+**Important design decision:**   
+Although tree-based models achieve lower raw error metrics, they were not selected as the basis for internal standards due to:
+
+- Reduced surface smoothness
+- Higher sensitivity to local data density
+- Lower suitability for defining stable, communicable design regions
+
+Metric improvements that compromise robustness and interpretability are not considered acceptable for standard definition.
 
 ---
 
@@ -166,13 +175,13 @@ To:
 > **“Where should internal chemistry targets be set to consistently achieve robust UTS behavior?”**
 
 In practice:
-- Internal chemistry targets can be defined **within** the external specification window  
-- High-risk regions of composition space can be identified early  
-- Physical trial campaigns can be reduced, delayed, or better targeted  
+- Internal chemistry targets can be defined **within** the external specification window
+- High-risk regions of composition space can be identified early
+- Physical trial campaigns can be reduced, delayed, or better targeted
 
 **Risk assessment emerges as a secondary outcome**:
-- Once internal targets are defined, deviation from them can be quantified as risk  
-- This supports conservative early-stage screening prior to production decisions  
+- Once internal targets are defined, deviation from them can be quantified as risk
+- This supports conservative early-stage screening prior to production decisions
 
 Chemistry thus transitions from a compliance variable into a **design and standardization lever**.
 
@@ -186,9 +195,9 @@ Chemistry thus transitions from a compliance variable into a **design and standa
 - A mechanism to move beyond binary compliance
 
 ### This Model *Is Not*:
-- A release-grade predictor  
-- A replacement for mechanical testing  
-- A complete representation of process–property interactions  
+- A release-grade predictor
+- A replacement for mechanical testing
+- A complete representation of process–property interactions
 
 Explicit boundaries prevent misuse.
 
@@ -196,10 +205,10 @@ Explicit boundaries prevent misuse.
 
 ## 8. Limitations, Risks, and Failure Modes
 
-- Chemistry does not capture all drivers of mechanical properties  
-- Error magnitude may vary across composition regions  
-- Uncertainty estimates derived here are **global**, not locally adaptive  
-- Standards derived from historical data may drift as processes evolve  
+- Chemistry does not capture all drivers of mechanical properties
+- Error magnitude may vary across composition regions
+- Uncertainty estimates derived here are **global**, not locally adaptive
+- Standards derived from historical data may drift as processes evolve
 
 These limitations motivate the uncertainty-aware and multi-variable extensions developed in later study cases.
 
@@ -209,22 +218,22 @@ These limitations motivate the uncertainty-aware and multi-variable extensions d
 
 This study case establishes the **foundation of the portfolio’s standardization narrative**:
 
-1. Internal standards can be **initiated using data**, not trial-and-error  
-2. Chemistry provides sufficient signal to justify this effort  
-3. Conservative treatment of uncertainty is mandatory  
+1. Internal standards can be **initiated using data**, not trial-and-error
+2. Chemistry provides sufficient signal to justify this effort
+3. Conservative treatment of uncertainty is mandatory
 
 Subsequent study cases build directly on these conclusions:
-- **SC03** tests whether similar standards generalize across alloy systems  
-- **SC04** evaluates which additional variables justify inclusion in standards  
-- **SC05** translates standards into uncertainty-aware decision tools  
+- **SC03** tests whether similar standards generalize across alloy systems
+- **SC04** evaluates which additional variables justify inclusion in standards
+- **SC05** translates standards into uncertainty-aware decision tools
 
 ---
 
 ## 10. Next Steps
 
-- Generalize chemistry-based standards across alloy families (→ SC03)  
-- Evaluate ROI of incorporating additional variables into standards (→ SC04)  
-- Convert standards into robust, uncertainty-aware design maps (→ SC05)  
+- Generalize chemistry-based standards across alloy families (→ SC03)
+- Evaluate ROI of incorporating additional variables into standards (→ SC04)
+- Convert standards into robust, uncertainty-aware design maps (→ SC05)
 
 ---
 
@@ -233,9 +242,9 @@ Subsequent study cases build directly on these conclusions:
 - Portfolio assumptions and conventions:  
   → [`README_EXTENDED.md`](https://github.com/ivvza-io/analytics-engineering-portfolio/blob/main/docs/README_EXTENDED.md)
 - Chemistry generalization across systems:  
-  → [`SC03 — Chemistry Generalization Across Systems`](https://github.com/ivvza-io/sc03-chemistry-generalization-across-systems.git) 
+  → [`SC03 — Chemistry Generalization Across Systems`](https://github.com/ivvza-io/sc03-chemistry-generalization-across-systems) 
 - Uncertainty-aware design tools:  
-  → [`SC05 — Uncertainty-Aware Design Maps`](https://github.com/ivvza-io/sc05-uncertainty-aware-design-maps.git)
+  → [`SC05 — Uncertainty-Aware Design Maps`](https://github.com/ivvza-io/sc05-uncertainty-aware-design-maps)
 
 ---
 
