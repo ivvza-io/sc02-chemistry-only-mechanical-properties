@@ -85,9 +85,9 @@ More complex non-linear learners were deliberately excluded to preserve:
 - Robustness of derived standards
 
 > Common portfolio-wide assumptions and conventions are documented in  
-> → [`README_EXTENDED.md`](https://github.com/ivvza-io/analytics-engineering-portfolio/blob/main/docs/README_EXTENDED.md)
+> → [`README_EXTENDED.md`](https://github.com/ivvza-io/analytics-engineering-portfolio/blob/main/docs/README_EXTENDED.md)   
 > Design rationale, methodological decisions, and implementation-level technical documentation are maintained in  
-→ [`docs/technical-notes`](https://github.com/ivvza-io/sc02-chemistry-only-mechanical-properties/tree/main/docs/technical_notes.md)
+→ [`docs/technical_notes.md`](https://github.com/ivvza-io/sc02-chemistry-only-mechanical-properties/blob/main/docs/technical_notes.md)
 
 ---
 
@@ -254,3 +254,9 @@ Subsequent study cases build directly on these conclusions:
 
 This case study does not seek to optimize a model.  
 It seeks to demonstrate that **internal standards can be built with data**, and that chemistry is a viable, defensible, and measurable starting point.
+
+---
+
+### How to Run This Study Case
+→ Reproducibility instructions are provided in [`HOW_TO_RUN.md`](HOW_TO_RUN.md).
+
