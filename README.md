@@ -118,7 +118,7 @@ This table defines the **chemical and mechanical envelope** within which interna
 | Model | MAE (median, MPa) | P95 absolute error (MPa) |
 |-----|------------------|-------------------------|
 | Ridge | 3.6 | 9.6 |
-| Poly2 | 3.6 | 9.8 |
+| Poly2 | 3.6 | 9.7 |
 | Random Forest | 2.9 | 8.2 |
 
 Key observations:
