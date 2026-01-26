@@ -18,13 +18,15 @@ The following structure is expected in order to reproduce the analysis:
 │       └── sc02/
 │           └── v_models_analysis_o.csv
 ├── notebooks/
-│   └── sc2_chemistry_only_uts_model.ipynb
+│   └── sc02_chemistry_only_uts_model.ipynb
 ├── requirements.txt
 └── requirements-notebooks.txt
 ```
 
 Public datasets are versioned under data/public/ to ensure reproducibility.
 All paths are resolved relative to the project root.
+
+Public datasets are intentionally limited to what is required to reproduce figures and metrics shown in the README.
 
 ---
 
@@ -38,6 +40,7 @@ From the repository root:
 python -m venv .venv
 source .venv/bin/activate
 ```
+> Python ≥ 3.10 recommended
 ---
 
 ## 3. Install Dependencies
@@ -80,12 +83,31 @@ jupyter notebook
 ```
 
 Then open:
-
-- `notebooks/sc2_chemistry_only_uts_model.ipynb`
+- `notebooks/sc02_chemistry_only_uts_model.ipynb`
 
 ---
 
-## 5. Quick Checks
+---
+
+## 5. Verify Installation
+
+**Check that the toolkit is installed correctly:**
+```bash
+python -c "from portfolio_analytics_toolkit.cv import build_oof_predictions; print('✓ Toolkit installed correctly')"
+```
+
+**Expected output:**
+```
+✓ Toolkit installed correctly
+```
+
+**If you see an error:**
+- Verify you ran `pip install -r requirements-notebooks.txt`
+- Check that you're using the correct virtual environment
+
+---
+
+## 6. Quick Checks
 
 Confirm the public dataset is present:
 

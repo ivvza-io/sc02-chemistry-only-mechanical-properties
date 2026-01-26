@@ -11,7 +11,7 @@ In the industrial context that motivated this work, the organization lacked **in
 - Mechanical properties
 - Process targets
 
-As long as materials complied with **bussines common specifications**, they were released, even when recurring downstream issues were observed:
+As long as materials complied with **Aluminum Association (AA) specification limits**, they were released, even when recurring downstream issues were observed:
 
 - Materials consistently too hard or too soft
 - Unstable forming behavior
@@ -84,11 +84,13 @@ More complex non-linear learners were deliberately excluded to preserve:
 - Surface continuity
 - Robustness of derived standards
 
-> Common portfolio-wide assumptions and conventions are documented in  
-> → [`README_EXTENDED.md`](https://github.com/ivvza-io/analytics-engineering-portfolio/blob/main/docs/README_EXTENDED.md)   
-> Design rationale, methodological decisions, and implementation-level technical documentation are maintained in  
-→ [`docs/technical_notes.md`](https://github.com/ivvza-io/sc02-chemistry-only-mechanical-properties/blob/main/docs/technical_notes.md)
-
+> **Methodology and Reproducibility**  
+> Portfolio-wide analytical conventions: [`README_EXTENDED.md`](https://github.com/ivvza-io/analytics-engineering-portfolio/blob/main/docs/README_EXTENDED.md)  
+> Design rationale and technical details: [`docs/technical_notes.md`](docs/technical_notes.md)  
+>  
+> This study case uses the [`portfolio-analytics-toolkit`](https://github.com/ivvza-io/portfolio-analytics-toolkit) for reusable CV, metrics, and plotting utilities to keep notebooks focused on analysis.  
+>  
+> Reproducibility instructions: [`HOW_TO_RUN.md`](HOW_TO_RUN.md)
 ---
 
 ## 5. Key Results and Evidence
@@ -258,5 +260,6 @@ It seeks to demonstrate that **internal standards can be built with data**, and 
 ---
 
 ### How to Run This Study Case
-→ Reproducibility instructions are provided in [`HOW_TO_RUN.md`](HOW_TO_RUN.md).
+Reproducibility instructions are provided in:   
+→ [`HOW_TO_RUN.md`](HOW_TO_RUN.md)
 
