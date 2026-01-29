@@ -65,12 +65,13 @@ reports/tmp/
 # Data (SC-specific policy)
 # =========================
 
+data/public/
 data/private/
 data/raw/
 data/interim/
 
-!data/public/
-!data/public/**
+#!data/public/
+#!data/public/**
 
 # =========================
 # Misc
